@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/1.0/users', [UserController::class, 'storeUserAccount']);
+Route::get('/1.0/users/{user_id}/accounts', [AccountController::class, 'listAccountWithBalance']);
+Route::get('/1.0/accounts/{account_id}', [AccountController::class, 'history']);
+

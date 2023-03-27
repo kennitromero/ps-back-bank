@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,10 +12,15 @@ return new class extends Migration
     {
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('account_origin_id');
-            $table->unsignedInteger('account_destination_id');
-            $table->float('amount', 10);
+            $table->unsignedBigInteger('account_origin_id')->nullable();
+            $table->unsignedBigInteger('account_destination_id');
+            $table->float('amount', 15);
             $table->string('type', 10)->comment('Tipo: depósito y retiro');
+
+            // A través del método ->foreign, le paso como parámetro, el campo que quiero agregarle la foránea
+            // y señalo a qué campo y de qué tabla pertenece dicha relación
+            $table->foreign('account_origin_id')->on('accounts')->references('id');
+            $table->foreign('account_destination_id')->on('accounts')->references('id');
             $table->timestamps();
         });
     }

@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class Transfer extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'full_name',
-        'email',
+        'account_origin_id',
+        'account_destination_id',
+        'amount',
+        'type'
     ];
 }
